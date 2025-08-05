@@ -632,7 +632,7 @@ export default function Home() {
                 </div>
               </div>
               <div>
-                <h3 className="font-semibold mb-2 text-sm sm:text-base">Donasi</h3>
+                <h3 className="font-semibold mb-2 text-sm sm:text-base">Partisipasi</h3>
                 <p className="text-sm sm:text-base">Bank BCA: 2302585866</p>
                 <p className="text-sm sm:text-base">a.n. Oki Widayat</p>
               </div>
