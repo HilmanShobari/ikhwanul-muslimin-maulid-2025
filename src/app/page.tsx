@@ -643,7 +643,7 @@ export default function Home() {
         {/* Footer */}
         <footer className="bg-emerald-800 text-white py-4 sm:py-6 mt-8 sm:mt-12">
           <div className="container mx-auto px-4 text-center">
-            <p className="text-sm sm:text-base">&copy; 2025 Majelis Al-Qur&apos;an, Sholawat, & Burdah Ikhwanul Muslimin. Semoga Allah SWT meridhoi acara ini.</p>
+            <p className="text-sm sm:text-base">&copy; 2025 Majelis Al-Qur&apos;an, Sholawat, & Burdah Ikhwanul Muslimin.</p>
           </div>
         </footer>
       </div>
