@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { ChevronDownIcon, ChevronUpIcon, PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { ChevronDownIcon, ChevronUpIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 export default function Home() {
   const [showIncomeDetails, setShowIncomeDetails] = useState(false);
@@ -10,15 +10,12 @@ export default function Home() {
   const [showCommitteeDetails, setShowCommitteeDetails] = useState(false);
   const [showBudgetTable, setShowBudgetTable] = useState(false);
   const [showPamphletModal, setShowPamphletModal] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
   const [countdown, setCountdown] = useState({
     days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0
   });
-  const audioRef = useRef<HTMLAudioElement>(null);
 
   // Countdown timer to September 5, 2025 at 12:00 WIB
   useEffect(() => {
@@ -45,85 +42,6 @@ export default function Home() {
 
     return () => clearInterval(interval);
   }, []);
-
-  // Enhanced music autoplay functionality
-  useEffect(() => {
-    const startMusic = async () => {
-      if (audioRef.current) {
-        audioRef.current.volume = 0.3;
-        audioRef.current.muted = false;
-        
-        try {
-          // Try immediate autoplay
-          await audioRef.current.play();
-          setIsPlaying(true);
-          console.log('Music started automatically');
-        } catch {
-          console.log('Autoplay blocked, trying alternative methods');
-          
-          // Alternative method: try after a short delay
-          setTimeout(async () => {
-            try {
-              if (audioRef.current) {
-                await audioRef.current.play();
-                setIsPlaying(true);
-                console.log('Music started after delay');
-              }
-            } catch {
-              // If still blocked, wait for user interaction
-              const enableMusic = async () => {
-                try {
-                  if (audioRef.current) {
-                    await audioRef.current.play();
-                    setIsPlaying(true);
-                    console.log('Music started after user interaction');
-                    // Remove listeners after successful play
-                    document.removeEventListener('click', enableMusic);
-                    document.removeEventListener('touchstart', enableMusic);
-                    document.removeEventListener('scroll', enableMusic);
-                    document.removeEventListener('keydown', enableMusic);
-                  }
-                } catch {
-                  console.log('Music still blocked');
-                }
-              };
-
-              // Add multiple event listeners for user interaction
-              document.addEventListener('click', enableMusic, { once: true });
-              document.addEventListener('touchstart', enableMusic, { once: true });
-              document.addEventListener('scroll', enableMusic, { once: true });
-              document.addEventListener('keydown', enableMusic, { once: true });
-            }
-          }, 1000);
-        }
-      }
-    };
-
-    // Start music after component mounts
-    const timer = setTimeout(startMusic, 100);
-    
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
-
-  const togglePlay = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-
-  const toggleMute = () => {
-    if (audioRef.current) {
-      audioRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
-  };
 
   // Download pamflet function
   const downloadPamflet = () => {
@@ -270,36 +188,6 @@ export default function Home() {
       {/* Background overlay */}
       <div className="absolute inset-0 bg-white/80 backdrop-blur-sm"></div>
       
-      {/* Background Music */}
-      <audio
-        ref={audioRef}
-        loop
-        preload="auto"
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
-      >
-        <source src="/islamic-music.mp3" type="audio/mpeg" />
-        Your browser does not support the audio element.
-      </audio>
-
-      {/* Music Controls */}
-      <div className="fixed top-4 right-4 z-50 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
-        <button
-          onClick={togglePlay}
-          className="bg-emerald-600 hover:bg-emerald-700 text-white p-2 sm:p-3 rounded-full shadow-lg transition-colors duration-300"
-          title={isPlaying ? 'Pause Music' : 'Play Music'}
-        >
-          {isPlaying ? <PauseIcon className="w-4 h-4 sm:w-5 sm:h-5" /> : <PlayIcon className="w-4 h-4 sm:w-5 sm:h-5" />}
-        </button>
-        <button
-          onClick={toggleMute}
-          className="bg-emerald-600 hover:bg-emerald-700 text-white p-2 sm:p-3 rounded-full shadow-lg transition-colors duration-300"
-          title={isMuted ? 'Unmute' : 'Mute'}
-        >
-          {isMuted ? <SpeakerXMarkIcon className="w-4 h-4 sm:w-5 sm:h-5" /> : <SpeakerWaveIcon className="w-4 h-4 sm:w-5 sm:h-5" />}
-        </button>
-      </div>
-
       {/* Pamphlet Modal */}
       {showPamphletModal && (
         <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
