@@ -126,11 +126,11 @@ export default function Home() {
     sections: [
       {
         name: 'Sie. Dana',
-        members: ['Oki Widayat', 'Kiki Muchorie', 'Agung Permadi', 'Firdaus']
+        members: ['Oki Widayat', 'Kiki Buchorie', 'Agung Permadi', 'Firdaus']
       },
       {
         name: 'Sie. Acara',
-        members: ['Jafar', 'Risky Sujarwo', 'Muhammad Lutfi', 'Zaenudin', 'Alim Hamzah Gea']
+        members: ['Jafar', 'Risky Sujarwo', 'Muhammad Lutfi', 'Zaenuddin', 'Alim Hamzah Gea']
       },
       {
         name: 'Sie. Humas',
@@ -142,7 +142,7 @@ export default function Home() {
       },
       {
         name: 'Sie. Konsumsi',
-        members: ['Fakhri Rasyid', 'Rustami', 'Muhammad Sulaeman', 'Yasin', 'A. Nur Faizi']
+        members: ['Fakhri Rasyid', 'Rustami', 'Muhammad Subhan', 'Yasin', 'A. Nur Faizi']
       },
       {
         name: 'Sie. Keamanan',
