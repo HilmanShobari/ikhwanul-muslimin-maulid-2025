@@ -606,7 +606,7 @@ export default function Home() {
                 <div>
                   {/* WhatsApp */}
                   <a 
-                    href="https://wa.me/6287850188977" 
+                    href="https://wa.me/6285717927260" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="flex items-center justify-center space-x-2 hover:bg-white/10 p-0 rounded-lg transition-colors duration-300 cursor-pointer"
