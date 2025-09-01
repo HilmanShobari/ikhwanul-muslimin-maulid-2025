@@ -536,7 +536,7 @@ export default function Home() {
                 <div className="flex items-center justify-between">
                   <div>
                     <h3 className="text-sm sm:text-lg font-semibold mb-2">
-                      Total Dana Masuk ({calculateEnvelopeCount()} amplop)
+                      Total Dana Masuk ({calculateEnvelopeCount()} Amplop)
                     </h3>
                     <p className="text-lg sm:text-2xl font-bold">
                       {budgetLoading ? 'Loading...' : formatCurrency(totalIncome)}
