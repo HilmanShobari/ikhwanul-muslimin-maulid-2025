@@ -111,6 +111,21 @@ export default function Home() {
 
   const { incomeData, expenseData } = budgetData;
 
+  // Calculate total envelope count from income details
+  const calculateEnvelopeCount = () => {
+    return incomeData.reduce((total, item) => {
+      // Extract numbers from the source string (e.g., "1 amplop", "23 amplop")
+      const matches = item.source.match(/(\d+)\s*amplop/gi);
+      if (matches) {
+        return total + matches.reduce((sum, match) => {
+          const number = parseInt(match.match(/\d+/)?.[0] || '0');
+          return sum + number;
+        }, 0);
+      }
+      return total;
+    }, 0);
+  };
+
   // Updated committee structure
   const committeeStructure = {
     pembina: [
@@ -520,7 +535,9 @@ export default function Home() {
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-sm sm:text-lg font-semibold mb-2">Total Dana Masuk</h3>
+                    <h3 className="text-sm sm:text-lg font-semibold mb-2">
+                      Total Dana Masuk ({calculateEnvelopeCount()} amplop)
+                    </h3>
                     <p className="text-lg sm:text-2xl font-bold">
                       {budgetLoading ? 'Loading...' : formatCurrency(totalIncome)}
                     </p>
